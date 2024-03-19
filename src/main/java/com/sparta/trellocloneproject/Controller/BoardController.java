@@ -4,6 +4,9 @@ import com.sparta.trellocloneproject.Entity.Board;
 import com.sparta.trellocloneproject.Security.UserDetailsImpl;
 import com.sparta.trellocloneproject.Service.BoardService;
 import com.sparta.trellocloneproject.dto.requestDto.BoardRequestDto;
+import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateColorDto;
+import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateDescriptionDto;
+import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateTitleDto;
 import com.sparta.trellocloneproject.dto.responseDto.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,5 +46,38 @@ public class BoardController {
     public ResponseEntity<BoardResponseDto> getBoard() {
 
         return null;
+    }
+
+    @PutMapping("/{boardId}/name")
+    public ResponseEntity<BoardResponseDto> updateBoardTitle(
+            @PathVariable Long boardId,
+            @RequestBody BoardUpdateTitleDto requestTitle,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board);
+
+        return ResponseEntity.ok(boardResponseDto);
+    }
+
+    @PutMapping("/{boardId}/color")
+    public ResponseEntity<BoardResponseDto> updateBoardColor(
+            @PathVariable Long boardId,
+            @RequestBody BoardUpdateColorDto requestColor,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board);
+
+        return ResponseEntity.ok(boardResponseDto);
+    }
+
+    @PutMapping("/{boardId}/description")
+    public ResponseEntity<BoardResponseDto> updateBoardDescription(
+            @PathVariable Long boardId,
+            @RequestBody BoardUpdateDescriptionDto requestDescription,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board);
+
+        return ResponseEntity.ok(boardResponseDto);
     }
 }

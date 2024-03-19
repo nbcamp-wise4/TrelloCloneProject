@@ -1,6 +1,9 @@
 package com.sparta.trellocloneproject.Entity;
 
 import com.sparta.trellocloneproject.dto.requestDto.BoardRequestDto;
+import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateColorDto;
+import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateDescriptionDto;
+import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateTitleDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,5 +33,17 @@ public class Board {
         this.color = requestDto.getColor();
         this.description = requestDto.getDescription();
         this.user = user;
+    }
+
+    public void updateBoardTitle(BoardUpdateTitleDto requestTitleDto) {
+        this.title = requestTitleDto.getTitle();
+    }
+
+    public void updateBoardColor(BoardUpdateColorDto requestColorDto) {
+        this.color = requestColorDto.getColor();
+    }
+
+    public void updateBoardDescription(BoardUpdateDescriptionDto requestDescriptionDto) {
+        this.description = requestDescriptionDto.getDescription();
     }
 }
