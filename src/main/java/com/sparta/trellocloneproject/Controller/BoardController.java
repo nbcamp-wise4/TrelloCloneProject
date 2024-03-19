@@ -1,6 +1,7 @@
 package com.sparta.trellocloneproject.Controller;
 
 import com.sparta.trellocloneproject.Entity.Board;
+import com.sparta.trellocloneproject.Security.UserDetailsImpl;
 import com.sparta.trellocloneproject.Service.BoardService;
 import com.sparta.trellocloneproject.dto.requestDto.BoardRequestDto;
 import com.sparta.trellocloneproject.dto.responseDto.BoardResponseDto;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,5 +29,19 @@ public class BoardController {
         BoardResponseDto responseDto = new BoardResponseDto(board);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+
+    }
+
+    @GetMapping("")
+    public ResponseEntity<BoardResponseDto> getAllBoards() {
+        List<BoardResponseDto> responseDto = boardService.getAllBoards();
+
+        return ResponseEntity.ok((BoardResponseDto) responseDto);
+    }
+
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardResponseDto> getBoard() {
+
+        return null;
     }
 }
