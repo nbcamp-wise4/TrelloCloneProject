@@ -1,9 +1,9 @@
 package com.sparta.trellocloneproject.Entity;
 
-import com.sparta.trellocloneproject.dto.requestDto.BoardRequestDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateColorDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateDescriptionDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateTitleDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardRequestDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateColorDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateDescriptionDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateTitleDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,10 +14,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name ="boards")
-public class Board {
+public class Board extends Timestamped{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long boardId;
+    private Long ID;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

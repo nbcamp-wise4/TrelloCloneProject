@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.dto.responseDto;
+package com.sparta.trellocloneproject.dto.Board.responseDto;
 
 import com.sparta.trellocloneproject.Entity.Board;
 import lombok.AllArgsConstructor;
