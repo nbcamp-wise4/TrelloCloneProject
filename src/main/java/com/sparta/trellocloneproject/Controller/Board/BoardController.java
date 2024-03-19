@@ -1,18 +1,17 @@
-package com.sparta.trellocloneproject.Controller;
+package com.sparta.trellocloneproject.Controller.Board;
 
 import com.sparta.trellocloneproject.Entity.Board;
 import com.sparta.trellocloneproject.Security.UserDetailsImpl;
-import com.sparta.trellocloneproject.Service.BoardService;
-import com.sparta.trellocloneproject.dto.requestDto.BoardRequestDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateColorDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateDescriptionDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateTitleDto;
-import com.sparta.trellocloneproject.dto.responseDto.BoardResponseDto;
+import com.sparta.trellocloneproject.Service.Board.BoardService;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardRequestDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateColorDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateDescriptionDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateTitleDto;
+import com.sparta.trellocloneproject.dto.Board.responseDto.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,7 +51,7 @@ public class BoardController {
     public ResponseEntity<BoardResponseDto> updateBoardTitle(
             @PathVariable Long boardId,
             @RequestBody BoardUpdateTitleDto requestTitle,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
         Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
@@ -63,7 +62,7 @@ public class BoardController {
     public ResponseEntity<BoardResponseDto> updateBoardColor(
             @PathVariable Long boardId,
             @RequestBody BoardUpdateColorDto requestColor,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
         Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
@@ -74,7 +73,7 @@ public class BoardController {
     public ResponseEntity<BoardResponseDto> updateBoardDescription(
             @PathVariable Long boardId,
             @RequestBody BoardUpdateDescriptionDto requestDescription,
-            @AuthenticationPrincipal UserDetails userDetails) {
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
         Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 

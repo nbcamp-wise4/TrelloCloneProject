@@ -1,13 +1,13 @@
-package com.sparta.trellocloneproject.Service;
+package com.sparta.trellocloneproject.Service.Board;
 
 import com.sparta.trellocloneproject.Entity.Board;
 import com.sparta.trellocloneproject.Entity.User;
 import com.sparta.trellocloneproject.Repository.BoardRepository;
-import com.sparta.trellocloneproject.dto.requestDto.BoardRequestDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateColorDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateDescriptionDto;
-import com.sparta.trellocloneproject.dto.requestDto.BoardUpdateTitleDto;
-import com.sparta.trellocloneproject.dto.responseDto.BoardResponseDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardRequestDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateColorDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateDescriptionDto;
+import com.sparta.trellocloneproject.dto.Board.requestDto.BoardUpdateTitleDto;
+import com.sparta.trellocloneproject.dto.Board.responseDto.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ public class BoardService {
 
     public Board createBoard(BoardRequestDto requestDto, User user) {
 
-        Board board = boardRepository.save(new Board(requestDto, user.getID()));
+        Board board = boardRepository.save(new Board(requestDto, user));
 
         return board;
     }
@@ -46,7 +46,7 @@ public class BoardService {
     @Transactional
     public Board updateBoardTitle(Long boardId, BoardUpdateTitleDto requestTitle, User user) {
         Board board = findOne(boardId);
-        if(board.getUser().equals(user)) {
+        if(!board.getUser().equals(user)) {
             throw new IllegalArgumentException("생성자만 수정할 수 있습니다.");
         }
         board.updateBoardTitle(requestTitle);
@@ -56,6 +56,7 @@ public class BoardService {
     @Transactional
     public Board updateBoardColor(Long boardId, BoardUpdateColorDto requestColor, User user) {
         Board board = findOne(boardId);
+
         if(board.getUser().equals(user)) {
             throw new IllegalArgumentException("생성자만 수정할 수 있습니다.");
         }
