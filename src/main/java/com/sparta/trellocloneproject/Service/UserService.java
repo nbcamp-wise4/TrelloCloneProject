@@ -2,6 +2,7 @@ package com.sparta.trellocloneproject.Service;
 
 
 
+import com.sparta.trellocloneproject.Security.UserDetailsImpl;
 import com.sparta.trellocloneproject.dto.LoginRequestDto;
 import com.sparta.trellocloneproject.dto.SignupRequestDto;
 import com.sparta.trellocloneproject.Entity.User;
@@ -65,11 +66,11 @@ public class UserService {
 
 
 
-    public void deleteUser(Long userId) {
+    public void deleteUser(Long userId, UserDetailsImpl userDetails) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new NullPointerException("해당 Id를 가진 유저는 존재하지 않습니다.")
         );
-        if(Objects.equals(user.getAuthorities().toString(), "[ADMIN]")){
+        if(Objects.equals(userDetails.getAuthorities().toString(), "[ADMIN]")){
             throw new IllegalArgumentException("admin 권한의 유저를 삭제할 순 없습니다.");
         }
         userRepository.deleteById(userId);
