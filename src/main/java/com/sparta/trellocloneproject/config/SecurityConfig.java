@@ -4,10 +4,10 @@ package com.sparta.trellocloneproject.config;
 
 
 
-import com.sparta.trellocloneproject.JWT.JwtAuthenticationFilter;
-import com.sparta.trellocloneproject.JWT.JwtAuthorizationFilter;
-import com.sparta.trellocloneproject.Security.UserDetailsServiceImpl;
-import com.sparta.trellocloneproject.JWT.JwtUtil;
+import com.sparta.trellocloneproject.jwt.JwtAuthenticationFilter;
+import com.sparta.trellocloneproject.jwt.JwtAuthorizationFilter;
+import com.sparta.trellocloneproject.security.UserDetailsServiceImpl;
+import com.sparta.trellocloneproject.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
