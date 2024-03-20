@@ -21,7 +21,6 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public Board createBoard(BoardRequestDto requestDto, User user) {
-
         Board board = boardRepository.save(new Board(requestDto, user));
 
         return board;
@@ -76,5 +75,14 @@ public class BoardService {
 
     private Board findOne(Long boardId) {
         return boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("없는 게시글 입니다."));
+    }
+
+    public void deleteBoard(Long boardId, User user) {
+        Board board = findOne(boardId);
+
+        if(board.getUser().equals(user)) {
+            throw new IllegalArgumentException("생성자만 삭제할 수 있습니다.");
+        }
+        boardRepository.delete(board);
     }
 }

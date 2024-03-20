@@ -25,8 +25,8 @@ public class BoardController {
     @PostMapping("")
     public ResponseEntity<BoardResponseDto> createBoard(
             @RequestBody BoardRequestDto requestDto,
-            @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) {
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
         Board board = boardService.createBoard(requestDto, userDetails.getUser());
         BoardResponseDto responseDto = new BoardResponseDto(board);
 
@@ -52,6 +52,7 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateTitleDto requestTitle,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
         Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
@@ -63,6 +64,7 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateColorDto requestColor,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
         Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
@@ -74,9 +76,19 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateDescriptionDto requestDescription,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
         Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
         return ResponseEntity.ok(boardResponseDto);
+    }
+
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<String> deleteBoard(
+            @PathVariable Long boardId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        boardService.deleteBoard(boardId, userDetails.getUser());
+
+        return ResponseEntity.ok("보드 삭제 완료");
     }
 }
