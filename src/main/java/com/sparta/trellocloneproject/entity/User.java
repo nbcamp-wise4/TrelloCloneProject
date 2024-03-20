@@ -3,6 +3,8 @@ package com.sparta.trellocloneproject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -30,4 +32,12 @@ public class User extends Timestamped{
         this.role = role;
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(!(o instanceof User user)) return false;
+        return Objects.equals(getID(), user.getID());
+    }
+
 }

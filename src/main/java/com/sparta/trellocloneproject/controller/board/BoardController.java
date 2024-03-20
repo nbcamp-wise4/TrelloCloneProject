@@ -34,10 +34,10 @@ public class BoardController {
     }
 
     @GetMapping("")
-    public ResponseEntity<BoardResponseDto> getAllBoards() {
-        List<BoardResponseDto> responseDto = boardService.getAllBoards();
-
-        return ResponseEntity.ok((BoardResponseDto) responseDto);
+    public List<BoardResponseDto> getUserAllBoards(
+            @AuthenticationPrincipal UserDetailsImpl userDetails
+    ){
+        return boardService.getUserAllBoards(userDetails);
     }
 
     @GetMapping("/{boardId}")
