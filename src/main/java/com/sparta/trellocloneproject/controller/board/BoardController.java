@@ -98,4 +98,14 @@ public class BoardController {
         boardMemberService.addBoardMember(UId, boardId);
         return "ok";
     }
+
+    @DeleteMapping("/{boardId}/member")
+    public ResponseEntity<String> deleteBoardMember(
+            @PathVariable Long boardId,
+            @RequestBody BoardMemberDeleteDto deleteDto) {
+
+        boardMemberService.deleteBoardMember(boardId, deleteDto);
+
+        return ResponseEntity.ok("보드 멤버 삭제 완료");
+    }
 }
