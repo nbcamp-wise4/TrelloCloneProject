@@ -1,11 +1,11 @@
 package com.sparta.trellocloneproject.dto.board.requestDto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@NoArgsConstructor
+@Setter
 public class BoardMemberRequestDto {
-    private String username;
-    private Long boardId;
+
+    private Long UserId;
 }
