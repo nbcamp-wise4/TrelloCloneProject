@@ -7,6 +7,9 @@ import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateTitleDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +30,10 @@ public class Board extends Timestamped{
     private String color;
     @Column
     private String description;
+
+    @OneToMany
+    @JoinColumn(name = "board_id")
+    private List<Columns> columns = new ArrayList<>();
 
     public Board(BoardRequestDto requestDto, User user) {
         this.title = requestDto.getTitle();

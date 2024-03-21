@@ -9,20 +9,21 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name ="boardmembers")
-public class BoardMember extends Timestamped{
+@Table(name ="boardmember")
+public class BoardMember {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    @ManyToOne
-    @JoinColumn(name = "boardId", nullable = false)
-    private Board board;
-    @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    @Column
+    private Long BoardID;
+    @Column
+    private Long UserID;
 
-    public BoardMember(User user, Board board) {
-        this.user = user;
-        this.board = board;
+    public BoardMember(Long BoardID,Long UserID){
+        this.BoardID = BoardID;
+        this.UserID = UserID;
+
+
     }
+
 }

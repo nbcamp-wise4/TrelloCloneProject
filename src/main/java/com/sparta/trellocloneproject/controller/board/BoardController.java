@@ -1,7 +1,12 @@
 package com.sparta.trellocloneproject.controller.board;
 
+import com.sparta.trellocloneproject.dto.board.BoardMemberRequestDto;
 import com.sparta.trellocloneproject.entity.Board;
+import com.sparta.trellocloneproject.entity.BoardMember;
+import com.sparta.trellocloneproject.repository.BoardMemberRepository;
+import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
+import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import com.sparta.trellocloneproject.service.board.BoardService;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
@@ -20,7 +25,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/boards")
 public class BoardController {
+    private final BoardMemberRepository boardMemberRepository;
     private final BoardService boardService;
+    private final BoardRepository boardRepository;
+    private final BoardMemberService boardMemberService;
 
     @PostMapping("")
     public ResponseEntity<BoardResponseDto> createBoard(
@@ -28,6 +36,7 @@ public class BoardController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Board board = boardService.createBoard(requestDto, userDetails.getUser());
+        boardMemberService.addBoardCreatorToMember(board,userDetails);
         BoardResponseDto responseDto = new BoardResponseDto(board);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
@@ -41,7 +50,7 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardResponseDto> getBoard() {
+    public ResponseEntity<BoardResponseDto> getBoard(@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return null;
     }
@@ -89,5 +98,12 @@ public class BoardController {
         boardService.deleteBoard(boardId, userDetails.getUser());
 
         return ResponseEntity.ok("보드 삭제 완료");
+    }
+
+    @PostMapping("/{boardId}/member")
+    public String addmember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        Long UId = requestDto.getUserId();
+        boardMemberService.addBoardMember(UId, boardId);
+        return "ok";
     }
 }

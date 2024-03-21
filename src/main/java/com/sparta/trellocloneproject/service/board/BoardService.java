@@ -1,8 +1,9 @@
 package com.sparta.trellocloneproject.service.board;
 
 import com.sparta.trellocloneproject.entity.Board;
+//import com.sparta.trellocloneproject.entity.BoardMember;
 import com.sparta.trellocloneproject.entity.User;
-import com.sparta.trellocloneproject.repository.Board.BoardCustomRepository;
+import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateDescriptionDto;
@@ -14,16 +15,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BoardService {
-    private final BoardCustomRepository boardCustomRepository;
+    private final BoardRepository boardRepository;
     private final UserRepository userRepository;
 
     public Board createBoard(BoardRequestDto requestDto, User user) {
-        Board board = boardCustomRepository.save(new Board(requestDto, user));
+        Board board = boardRepository.save(new Board(requestDto, user));
 
         return board;
     }
@@ -31,7 +33,7 @@ public class BoardService {
     public List<BoardResponseDto> getUserAllBoards(UserDetailsImpl userDetails) {
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("존재하는 회원이 없습니다."));
-        return boardCustomRepository.findAllByUser(user)
+        return boardRepository.findAllByUser(user)
                 .stream().map(BoardResponseDto::new).toList();
     }
 
@@ -72,7 +74,7 @@ public class BoardService {
     }
 
     private Board findOne(Long boardId) {
-        return boardCustomRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("없는 게시글 입니다."));
+        return boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("없는 게시글 입니다."));
     }
 
     public void deleteBoard(Long boardId, User user) {
@@ -81,6 +83,6 @@ public class BoardService {
         if(!board.getUser().equals(user)) {
             throw new IllegalArgumentException("생성자만 삭제할 수 있습니다.");
         }
-        boardCustomRepository.delete(board);
+        boardRepository.delete(board);
     }
 }
