@@ -3,6 +3,7 @@ package com.sparta.trellocloneproject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,8 @@ public class User extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
+//    @OneToMany
+//    private List<Board> boards;
     @Column
     private String username;
     @Column
