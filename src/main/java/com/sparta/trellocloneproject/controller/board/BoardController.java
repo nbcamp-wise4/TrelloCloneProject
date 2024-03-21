@@ -1,17 +1,11 @@
 package com.sparta.trellocloneproject.controller.board;
 
-import com.sparta.trellocloneproject.dto.board.BoardMemberRequestDto;
+import com.sparta.trellocloneproject.dto.board.requestDto.BoardMemberRequestDto;
+import com.sparta.trellocloneproject.dto.board.requestDto.*;
 import com.sparta.trellocloneproject.entity.Board;
-import com.sparta.trellocloneproject.entity.BoardMember;
-import com.sparta.trellocloneproject.repository.BoardMemberRepository;
-import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import com.sparta.trellocloneproject.service.board.BoardService;
-import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
-import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
-import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateDescriptionDto;
-import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateTitleDto;
 import com.sparta.trellocloneproject.dto.board.responseDto.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,24 +19,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/boards")
 public class BoardController {
-    private final BoardMemberRepository boardMemberRepository;
     private final BoardService boardService;
-    private final BoardRepository boardRepository;
     private final BoardMemberService boardMemberService;
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<BoardResponseDto> createBoard(
             @RequestBody BoardRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Board board = boardService.createBoard(requestDto, userDetails.getUser());
         boardMemberService.addBoardCreatorToMember(board,userDetails);
-        BoardResponseDto responseDto = new BoardResponseDto(board);
+        BoardResponseDto responseDto = new BoardResponseDto(board.getTitle());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<BoardResponseDto> getUserAllBoards(
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ){
@@ -62,7 +54,7 @@ public class BoardController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
-        BoardResponseDto boardResponseDto = new BoardResponseDto(board);
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
 
         return ResponseEntity.ok(boardResponseDto);
     }
@@ -74,7 +66,7 @@ public class BoardController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
-        BoardResponseDto boardResponseDto = new BoardResponseDto(board);
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
 
         return ResponseEntity.ok(boardResponseDto);
     }
@@ -86,7 +78,7 @@ public class BoardController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
-        BoardResponseDto boardResponseDto = new BoardResponseDto(board);
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
 
         return ResponseEntity.ok(boardResponseDto);
     }
@@ -100,8 +92,8 @@ public class BoardController {
         return ResponseEntity.ok("보드 삭제 완료");
     }
 
-    @PostMapping("/{boardId}/member")
-    public String addmember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    @PostMapping("/{boardId}/members")
+    public String addBoardMember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         Long UId = requestDto.getUserId();
         boardMemberService.addBoardMember(UId, boardId);
         return "ok";

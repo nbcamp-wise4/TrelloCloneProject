@@ -1,21 +1,19 @@
 package com.sparta.trellocloneproject.service.board;
 
 import com.sparta.trellocloneproject.entity.Board;
-//import com.sparta.trellocloneproject.entity.BoardMember;
 import com.sparta.trellocloneproject.entity.User;
-import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateDescriptionDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateTitleDto;
 import com.sparta.trellocloneproject.dto.board.responseDto.BoardResponseDto;
+import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.repository.UserRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +32,7 @@ public class BoardService {
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("존재하는 회원이 없습니다."));
         return boardRepository.findAllByUser(user)
-                .stream().map(BoardResponseDto::new).toList();
+                .stream().map(board -> new BoardResponseDto(board.getTitle())).toList();
     }
 
     public List<BoardResponseDto> getBoard() {
