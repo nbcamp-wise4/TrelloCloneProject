@@ -1,7 +1,7 @@
 package com.sparta.trellocloneproject.service.board;
 
 import com.sparta.trellocloneproject.entity.Board;
-import com.sparta.trellocloneproject.entity.BoardMember;
+//import com.sparta.trellocloneproject.entity.BoardMember;
 import com.sparta.trellocloneproject.entity.User;
 import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
