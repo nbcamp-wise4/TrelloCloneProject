@@ -47,7 +47,6 @@ public class ColumnsController {
 
     @DeleteMapping("/{boardId}/{columnId}")
     public String deleteColumn(@PathVariable Long boardId,@PathVariable Long columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
-
         if(boardMemberService.isUserMember(userDetails,boardId)){
         columnsService.deleteColumn(columnId);
         return "ok";}
@@ -62,10 +61,12 @@ public class ColumnsController {
         return null;
 
     }
-    @PutMapping("/{boardId}/columns/p")
-    public String changePosition(@RequestBody ColumnsPositionRequestDto requestDto){
+    @PutMapping("/{boardId}/columns/position")
+    public String changePosition(@PathVariable Long boardId,@RequestBody ColumnsPositionRequestDto requestDto,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        if(boardMemberService.isUserMember(userDetails,boardId)){
            columnsService.changePosition(requestDto.getPosition1(), requestDto.getPosition2());
-           return "ok";
+           return "ok";}
+        return null;
 
     }
 
