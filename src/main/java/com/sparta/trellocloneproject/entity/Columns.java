@@ -1,5 +1,6 @@
 package com.sparta.trellocloneproject.entity;
 
+import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,8 +18,22 @@ public class Columns {
     @Column
     private String title;
     @Column
-    private int position;
+    private Long position;
 
+    @ManyToOne
+    @JoinColumn(name ="board_id")
+    private Board board;
 
+    public Columns (ColumnsRequestDto requestDto,Board board,Long position){
+        this.title = requestDto.getTitle();
+        this.position = position;
+        this.board =board;
+    }
 
+    public void updateTitle(String title){
+        this.title = title;
+    }
+    public void updatePosition(Long position){
+        this.position = position;
+    }
 }

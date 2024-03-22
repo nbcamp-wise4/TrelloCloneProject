@@ -1,9 +1,10 @@
 package com.sparta.trellocloneproject.dto.board.requestDto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class BoardRequestDto {
     private String title;
