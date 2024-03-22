@@ -1,21 +1,21 @@
 package com.sparta.trellocloneproject.controller;
 
-import com.sparta.trellocloneproject.entity.BoardMember;
-import com.sparta.trellocloneproject.entity.Columns;
-import com.sparta.trellocloneproject.entity.User;
+import com.sparta.trellocloneproject.dto.columns.ColumnsPositionRequestDto;
+import com.sparta.trellocloneproject.dto.columns.ColumnsResponseDto;
 import com.sparta.trellocloneproject.repository.BoardMemberRepository;
 import com.sparta.trellocloneproject.repository.BoardRepository;
-import com.sparta.trellocloneproject.repository.BoardMemberRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.service.ColumnsService;
-import com.sparta.trellocloneproject.dto.ColumnsRequestDto;
+import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
+import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/api")
@@ -25,61 +25,50 @@ public class ColumnsController {
     private final BoardRepository boardRepository;
     private final BoardMemberRepository boardmemberRepository;
     private final ColumnsService columnsService;
+    private final BoardMemberService boardMemberService;
 
     @PostMapping("/{boardId}/columns")
-    public String addColumn(@RequestBody ColumnsRequestDto requestDto,@PathVariable String boardId,@AuthenticationPrincipal UserDetailsImpl userDetails){
-        Long bID = Long.parseLong(boardId);
-        BoardMember member = boardmemberRepository.getReferenceById(bID);
-        Long memberUserID = member.getUserID();
-        User user = userDetails.getUser();
-        if(!Objects.equals(memberUserID, user.getID())){
-            throw new IllegalArgumentException("접근제한");
-        }
-        columnsService.createColumn(requestDto,boardRepository.getReferenceById(member.getBoardID()));
-          return "ok";
+    public String addColumn(@RequestBody ColumnsRequestDto requestDto,@PathVariable Long boardId,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+        columnsService.createColumn(requestDto,boardRepository.getReferenceById(boardId));
+          return "ok";}
+          return null;
     }
 
-    @PutMapping("/{memberId}/{columnId}")
-    public String titleUpdate(@RequestBody ColumnsRequestDto requestDto,@PathVariable String memberId,@PathVariable String columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
-        Long mID = Long.parseLong(memberId);
-        BoardMember member = boardmemberRepository.getReferenceById(mID);
-        Long memberUserID = member.getUserID();
-        User user = userDetails.getUser();
-        if(!Objects.equals(memberUserID, user.getID())){
-            throw new IllegalArgumentException("접근제한");
+    @PutMapping("/{boardId}/{columnId}")
+    public String titleUpdate(@RequestBody ColumnsRequestDto requestDto,@PathVariable Long boardId,@PathVariable Long columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+        columnsService.updateColumn(requestDto.getTitle(),columnId);
+            return "ok";
         }
-        Long cID = Long.parseLong(columnId);
-        columnsService.updateColumn(requestDto.getTitle(),cID);
-        return "ok";
-    }
-
-    @DeleteMapping("/{memberId}/{columnId}")
-    public String deleteColumn(@PathVariable String memberId,@PathVariable String columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
-        Long mID = Long.parseLong(memberId);
-        BoardMember member = boardmemberRepository.getReferenceById(mID);
-        Long memberUserID = member.getUserID();
-        User user = userDetails.getUser();
-        if(!Objects.equals(memberUserID, user.getID())){
-            throw new IllegalArgumentException("접근제한");
-        }
-        Long cID = Long.parseLong(columnId);
-        columnsService.deleteColumn(cID);
-        return "ok";
-    }
-
-    @GetMapping("/{memberId}")
-    public List<Columns> getColumnList(@PathVariable String memberId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        Long mID = Long.parseLong(memberId);
-        BoardMember member = boardmemberRepository.getReferenceById(mID);
-        Long memberUserID = member.getUserID();
-        User user = userDetails.getUser();
-        if(!Objects.equals(memberUserID, user.getID())){
-            throw new IllegalArgumentException("접근제한");
-        }
-        Long bID = member.getBoardID();
-        return columnsService.getColumnsList(bID);
+        return null;
 
     }
+
+    @DeleteMapping("/{boardId}/{columnId}")
+    public String deleteColumn(@PathVariable Long boardId,@PathVariable Long columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
+
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+        columnsService.deleteColumn(columnId);
+        return "ok";}
+        return null;
+    }
+
+    @GetMapping("/{boardId}/columns")
+    public ResponseEntity<List<ColumnsResponseDto>> getColumnList(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+        List<ColumnsResponseDto>  ColumnsList = columnsService.getColumnsList(boardId);
+        return new ResponseEntity<>(ColumnsList, HttpStatus.OK);}
+        return null;
+
+    }
+    @PutMapping("/{boardId}/columns/p")
+    public String changePosition(@RequestBody ColumnsPositionRequestDto requestDto){
+           columnsService.changePosition(requestDto.getPosition1(), requestDto.getPosition2());
+           return "ok";
+
+    }
+
 
 
 

@@ -30,6 +30,9 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardMemberService boardMemberService;
 
+
+
+
     @PostMapping("")
     public ResponseEntity<BoardResponseDto> createBoard(
             @RequestBody BoardRequestDto requestDto,
@@ -60,11 +63,12 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateTitleDto requestTitle,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
+        if(boardMemberService.isUserMember(userDetails,boardId)){
         Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
-        return ResponseEntity.ok(boardResponseDto);
+        return ResponseEntity.ok(boardResponseDto);}
+        return null;
     }
 
     @PutMapping("/{boardId}/color")
@@ -72,11 +76,12 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateColorDto requestColor,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
+        if(boardMemberService.isUserMember(userDetails,boardId)){
         Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
-        return ResponseEntity.ok(boardResponseDto);
+        return ResponseEntity.ok(boardResponseDto);}
+        return null;
     }
 
     @PutMapping("/{boardId}/description")
@@ -84,26 +89,31 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateDescriptionDto requestDescription,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
+        if(boardMemberService.isUserMember(userDetails,boardId)){
         Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
         BoardResponseDto boardResponseDto = new BoardResponseDto(board);
 
-        return ResponseEntity.ok(boardResponseDto);
+        return ResponseEntity.ok(boardResponseDto);}
+        return null;
     }
 
     @DeleteMapping("/{boardId}")
     public ResponseEntity<String> deleteBoard(
             @PathVariable Long boardId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        if(boardMemberService.isUserMember(userDetails,boardId)){
         boardService.deleteBoard(boardId, userDetails.getUser());
 
-        return ResponseEntity.ok("보드 삭제 완료");
+        return ResponseEntity.ok("보드 삭제 완료");}
+        return null;
     }
 
     @PostMapping("/{boardId}/member")
     public String addmember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        if(boardMemberService.isUserMember(userDetails,boardId)){
         Long UId = requestDto.getUserId();
         boardMemberService.addBoardMember(UId, boardId);
-        return "ok";
+        return "ok";}
+        return null;
     }
 }

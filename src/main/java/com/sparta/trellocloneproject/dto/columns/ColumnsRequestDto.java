@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.dto;
+package com.sparta.trellocloneproject.dto.columns;
 import lombok.*;
 
 @Getter
@@ -6,6 +6,6 @@ import lombok.*;
 public class ColumnsRequestDto {
 
     private String title;
-    private int position;
+
 
 }

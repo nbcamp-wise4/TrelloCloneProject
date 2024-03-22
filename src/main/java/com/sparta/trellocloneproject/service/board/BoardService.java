@@ -3,6 +3,7 @@ package com.sparta.trellocloneproject.service.board;
 import com.sparta.trellocloneproject.entity.Board;
 //import com.sparta.trellocloneproject.entity.BoardMember;
 import com.sparta.trellocloneproject.entity.User;
+import com.sparta.trellocloneproject.repository.BoardMemberRepository;
 import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
@@ -23,13 +24,13 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+    private final BoardMemberRepository boardMemberRepository;
 
     public Board createBoard(BoardRequestDto requestDto, User user) {
         Board board = boardRepository.save(new Board(requestDto, user));
 
         return board;
     }
-
     public List<BoardResponseDto> getUserAllBoards(UserDetailsImpl userDetails) {
         User user = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("존재하는 회원이 없습니다."));
