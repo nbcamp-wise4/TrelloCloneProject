@@ -35,14 +35,17 @@ public class BoardController {
     }
 
     @GetMapping
-    public List<BoardResponseDto> getUserAllBoards(
+    public ResponseEntity<List<BoardResponseDto>> getUserAllBoards(
             @AuthenticationPrincipal UserDetailsImpl userDetails
     ){
-        return boardService.getUserAllBoards(userDetails);
+        List<BoardResponseDto> responseDtoList = boardService.getUserAllBoards(userDetails.getUser().getID());
+        return ResponseEntity.status(HttpStatus.OK).body(responseDtoList);
     }
 
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardResponseDto> getBoard(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<BoardResponseDto> getBoard(
+            @PathVariable Long boardId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return null;
     }
