@@ -108,7 +108,7 @@ public class BoardController {
     }
 
     @PostMapping("/{boardId}/members")
-    public String addmember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public String addBoardMember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
         Long UId = requestDto.getUserId();
         boardMemberService.addBoardMember(UId, boardId);
