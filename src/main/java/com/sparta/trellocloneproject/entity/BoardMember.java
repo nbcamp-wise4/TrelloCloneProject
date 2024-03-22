@@ -19,9 +19,11 @@ public class BoardMember {
     @Column
     private Long userID;
 
-    public BoardMember(Long boardID, Long userID){
-        this.boardID = boardID;
-        this.userID = userID;
+    public BoardMember(Long BoardID,Long UserID){
+        this.boardID = BoardID;
+        this.userID = UserID;
+
+
     }
 
 }

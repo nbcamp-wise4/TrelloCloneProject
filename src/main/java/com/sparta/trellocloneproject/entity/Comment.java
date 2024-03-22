@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name ="columns")
+@Table(name ="comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

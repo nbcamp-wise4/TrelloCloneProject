@@ -23,8 +23,8 @@ public class BoardMemberService {
 
     }
 
-    public BoardMember addBoardMember(Long UserId, Long BoardId){
-        BoardMember boardMember = new BoardMember(BoardId,UserId);
+    public BoardMember addBoardMember(Long userId,Long boardId){
+        BoardMember boardMember = new BoardMember(boardId,userId);
         return boardMemberRepository.save(boardMember);
 
     }
@@ -43,4 +43,11 @@ public class BoardMemberService {
         boardMemberRepository.delete(boardMember);
     }
 
+
+   public boolean isUserMember(UserDetailsImpl userDetails,Long boardId){
+        BoardMember checkMember=boardMemberRepository.findBoardMemberByUserIDAndBoardID(userDetails.getUser().getID(),boardId)
+                .orElseThrow(()-> new NullPointerException(""));
+
+        return checkMember != null;
+    }
 }
