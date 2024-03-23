@@ -17,18 +17,11 @@ public class BoardMemberService {
     private final BoardMemberRepository boardMemberRepository;
     private final UserRepository userRepository;
 
-    public void addBoardCreatorToMember(Board board, UserDetailsImpl userDetails){
-        BoardMember boardMember = new BoardMember(board.getID(),userDetails.getUser().getID());
-        boardMemberRepository.save(boardMember);
-
-    }
-
     public BoardMember addBoardMember(Long userId,Long boardId){
         BoardMember boardMember = new BoardMember(boardId,userId);
+
         return boardMemberRepository.save(boardMember);
-
     }
-
 
     public void deleteBoardMember(Long boardId, BoardMemberDeleteDto deleteDto) {
         // 요청한 사용자 정보 가져오기
@@ -42,7 +35,6 @@ public class BoardMemberService {
 
         boardMemberRepository.delete(boardMember);
     }
-
 
    public boolean isUserMember(UserDetailsImpl userDetails,Long boardId){
         BoardMember checkMember=boardMemberRepository.findBoardMemberByUserIDAndBoardID(userDetails.getUser().getID(),boardId)

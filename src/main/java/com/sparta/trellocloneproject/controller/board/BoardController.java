@@ -31,8 +31,7 @@ public class BoardController {
             @RequestBody BoardRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        Board board = boardService.createBoard(requestDto, userDetails.getUser());
-        boardMemberService.addBoardCreatorToMember(board,userDetails);
+        Board board = boardService.createBoard(requestDto, userDetails);
         BoardResponseDto responseDto = new BoardResponseDto(board.getTitle());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
@@ -55,16 +54,18 @@ public class BoardController {
         return null;
     }
 
-    @PutMapping("/{boardId}/name")
+    @PutMapping("/{boardId}/title")
     public ResponseEntity<BoardResponseDto> updateBoardTitle(
             @PathVariable Long boardId,
             @RequestBody BoardUpdateTitleDto requestTitle,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        if(boardMemberService.isUserMember(userDetails,boardId)){
-        Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
-        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
 
-        return ResponseEntity.ok(boardResponseDto);}
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+            Board board = boardService.updateBoardTitle(boardId, requestTitle, userDetails.getUser());
+            BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
+
+            return ResponseEntity.ok(boardResponseDto);
+        }
         return null;
     }
 
@@ -73,11 +74,12 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateColorDto requestColor,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        if(boardMemberService.isUserMember(userDetails,boardId)){
-        Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
-        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
 
-        return ResponseEntity.ok(boardResponseDto);
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+            Board board = boardService.updateBoardColor(boardId, requestColor, userDetails.getUser());
+            BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
+
+            return ResponseEntity.ok(boardResponseDto);
         }
         return null;
     }
@@ -87,11 +89,12 @@ public class BoardController {
             @PathVariable Long boardId,
             @RequestBody BoardUpdateDescriptionDto requestDescription,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        if(boardMemberService.isUserMember(userDetails,boardId)){
-        Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
-        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
 
-        return ResponseEntity.ok(boardResponseDto);
+        if(boardMemberService.isUserMember(userDetails,boardId)){
+            Board board = boardService.updateBoardDescription(boardId, requestDescription, userDetails.getUser());
+            BoardResponseDto boardResponseDto = new BoardResponseDto(board.getTitle());
+
+            return ResponseEntity.ok(boardResponseDto);
         }
         return null;
     }
@@ -100,20 +103,21 @@ public class BoardController {
     public ResponseEntity<String> deleteBoard(
             @PathVariable Long boardId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        if(boardMemberService.isUserMember(userDetails,boardId)){
         boardService.deleteBoard(boardId, userDetails.getUser());
 
         return ResponseEntity.ok("보드 삭제 완료");
-        }
-        return null;
+
     }
 
     @PostMapping("/{boardId}/members")
-    public String addBoardMember(@RequestBody BoardMemberRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public String addBoardMember(
+            @RequestBody BoardMemberRequestDto requestDto,
+            @PathVariable Long boardId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
-        Long UId = requestDto.getUserId();
-        boardMemberService.addBoardMember(UId, boardId);
-        return "ok";
+            Long UId = requestDto.getUserId();
+            boardMemberService.addBoardMember(UId, boardId);
+            return "ok";
         }
         return null;
     }
