@@ -36,8 +36,6 @@ public class BoardService {
     public List<BoardResponseDto> getUserAllBoards(Long userId) {
         List<BoardMember> userMembershipList = boardMemberRepository.findBoardMemberByUserID(userId);
         List<Board> boardList = new ArrayList<>();
-
-
         for(BoardMember boardMember : userMembershipList) {
             Board board = boardRepository.findById(boardMember.getBoardID())
                     .orElseThrow(()->new IllegalArgumentException("보드를 찾을 수 없습니다."));
@@ -54,9 +52,7 @@ public class BoardService {
     @Transactional
     public Board updateBoardTitle(Long boardId, BoardUpdateTitleDto requestTitle, User user) {
         Board board = findOne(boardId);
-        if(!board.getUser().equals(user)) {
-            throw new IllegalArgumentException("생성자만 수정할 수 있습니다.");
-        }
+
         board.updateBoardTitle(requestTitle);
         return board;
     }
@@ -65,9 +61,7 @@ public class BoardService {
     public Board updateBoardColor(Long boardId, BoardUpdateColorDto requestColor, User user) {
         Board board = findOne(boardId);
 
-        if(!board.getUser().equals(user)) {
-            throw new IllegalArgumentException("생성자만 수정할 수 있습니다.");
-        }
+
         board.updateBoardColor(requestColor);
         return board;
     }
@@ -75,9 +69,7 @@ public class BoardService {
     @Transactional
     public Board updateBoardDescription(Long boardId, BoardUpdateDescriptionDto requestDescription, User user) {
         Board board = findOne(boardId);
-        if(!board.getUser().equals(user)) {
-            throw new IllegalArgumentException("생성자만 수정할 수 있습니다.");
-        }
+
         board.updateBoardDescription(requestDescription);
         return board;
     }

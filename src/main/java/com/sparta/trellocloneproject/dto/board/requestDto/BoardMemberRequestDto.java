@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class BoardMemberRequestDto {
 
-    private Long UserId;
+    private Long userId;
 }

@@ -4,6 +4,9 @@ import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -23,6 +26,10 @@ public class Columns {
     @ManyToOne
     @JoinColumn(name ="board_id")
     private Board board;
+
+    @OneToMany
+    @JoinColumn(name = "columns_id")
+    private List<Card> cards = new ArrayList<>();
 
     public Columns (ColumnsRequestDto requestDto,Board board,Long position){
         this.title = requestDto.getTitle();

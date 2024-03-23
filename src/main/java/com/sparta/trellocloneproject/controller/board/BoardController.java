@@ -44,6 +44,7 @@ public class BoardController {
     ){
         List<BoardResponseDto> responseDtoList = boardService.getUserAllBoards(userDetails.getUser().getID());
         return ResponseEntity.status(HttpStatus.OK).body(responseDtoList);
+
     }
 
     @GetMapping("/{boardId}")
