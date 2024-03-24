@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ColumnsRepository extends JpaRepository<Columns, Long> {
-List<Columns> findColumnsByBoard(Board board);
-Columns findColumnsByPosition(Long position);
-
-
-
-
+    List<Columns> findColumnsByBoard(Board board);
+    Columns findColumnsByPosition(Long position);
+    List<Columns> findColumnsByBoardID(Long boardId);
 }

@@ -2,6 +2,7 @@ package com.sparta.trellocloneproject.controller.board;
 
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardMemberRequestDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.*;
+import com.sparta.trellocloneproject.dto.board.responseDto.BoardGetResponseDto;
 import com.sparta.trellocloneproject.entity.Board;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.service.board.BoardMemberService;
@@ -47,11 +48,12 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public ResponseEntity<BoardResponseDto> getBoard(
+    public ResponseEntity<BoardGetResponseDto> getBoard(
             @PathVariable Long boardId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return null;
+            BoardGetResponseDto getResponseDto = boardService.getBoard(boardId, userDetails.getUser());
+            return ResponseEntity.ok(getResponseDto);
     }
 
     @PutMapping("/{boardId}/title")
