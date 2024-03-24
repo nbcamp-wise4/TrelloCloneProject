@@ -10,8 +10,7 @@ import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateDescriptionDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateTitleDto;
 import com.sparta.trellocloneproject.dto.board.responseDto.BoardResponseDto;
-import com.sparta.trellocloneproject.repository.ColumnsRepository;
-import com.sparta.trellocloneproject.repository.UserRepository;
+import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +22,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-    private final UserRepository userRepository;
     private final BoardMemberRepository boardMemberRepository;
-    private final ColumnsRepository columnsRepository;
 
-    public Board createBoard(BoardRequestDto requestDto, User user) {
-        Board board = boardRepository.save(new Board(requestDto, user));
+    public Board createBoard(BoardRequestDto requestDto, UserDetailsImpl userDetails) {
+        Board board = boardRepository.save(new Board(requestDto, userDetails.getUser()));
+        BoardMember boardMember = new BoardMember(board.getID(),userDetails.getUser().getID());
+        boardMemberRepository.save(boardMember);
 
         return board;
     }
@@ -60,7 +59,6 @@ public class BoardService {
     @Transactional
     public Board updateBoardColor(Long boardId, BoardUpdateColorDto requestColor, User user) {
         Board board = findOne(boardId);
-
 
         board.updateBoardColor(requestColor);
         return board;

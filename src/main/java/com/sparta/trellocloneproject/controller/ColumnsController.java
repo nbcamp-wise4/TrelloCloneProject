@@ -30,15 +30,16 @@ public class ColumnsController {
     @PostMapping("/{boardId}/columns")
     public String addColumn(@RequestBody ColumnsRequestDto requestDto,@PathVariable Long boardId,@AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
-        columnsService.createColumn(requestDto,boardRepository.getReferenceById(boardId));
-          return "ok";}
+            columnsService.createColumn(requestDto,boardRepository.getReferenceById(boardId));
+            return "ok";
+        }
           return null;
     }
 
     @PutMapping("/{boardId}/{columnId}")
     public String titleUpdate(@RequestBody ColumnsRequestDto requestDto,@PathVariable Long boardId,@PathVariable Long columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
-        columnsService.updateColumn(requestDto.getTitle(),columnId);
+            columnsService.updateColumn(requestDto.getTitle(),columnId);
             return "ok";
         }
         return null;
@@ -48,16 +49,18 @@ public class ColumnsController {
     @DeleteMapping("/{boardId}/{columnId}")
     public String deleteColumn(@PathVariable Long boardId,@PathVariable Long columnId,@AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
-        columnsService.deleteColumn(columnId);
-        return "ok";}
+            columnsService.deleteColumn(columnId);
+            return "ok";
+        }
         return null;
     }
 
     @GetMapping("/{boardId}/columns")
     public ResponseEntity<List<ColumnsResponseDto>> getColumnList(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
-        List<ColumnsResponseDto>  ColumnsList = columnsService.getColumnsList(boardId);
-        return new ResponseEntity<>(ColumnsList, HttpStatus.OK);}
+            List<ColumnsResponseDto>  ColumnsList = columnsService.getColumnsList(boardId);
+            return new ResponseEntity<>(ColumnsList, HttpStatus.OK);
+        }
         return null;
 
     }
@@ -65,15 +68,10 @@ public class ColumnsController {
     public String changePosition(@PathVariable Long boardId,@RequestBody ColumnsPositionRequestDto requestDto,@AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
            columnsService.changePosition(requestDto.getPosition1(), requestDto.getPosition2());
-           return "ok";}
+           return "ok";
+        }
         return null;
 
     }
-
-
-
-
-
-
 
 }
