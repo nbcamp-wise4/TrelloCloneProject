@@ -1,6 +1,6 @@
 package com.sparta.trellocloneproject.entity;
 
-import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
+import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 

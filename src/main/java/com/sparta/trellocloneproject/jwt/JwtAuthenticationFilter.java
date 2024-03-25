@@ -2,7 +2,7 @@ package com.sparta.trellocloneproject.jwt;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.trellocloneproject.dto.LoginRequestDto;
+import com.sparta.trellocloneproject.dto.login.LoginRequestDto;
 import com.sparta.trellocloneproject.entity.UserRoleEnum;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import jakarta.servlet.FilterChain;

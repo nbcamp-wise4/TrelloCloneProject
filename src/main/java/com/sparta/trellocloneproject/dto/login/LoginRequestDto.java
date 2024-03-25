@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.dto;
+package com.sparta.trellocloneproject.dto.login;
 
 
 

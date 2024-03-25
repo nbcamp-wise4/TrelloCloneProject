@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.dto.columns;
+package com.sparta.trellocloneproject.dto.columns.requestDto;
 import lombok.*;
 
 @Getter

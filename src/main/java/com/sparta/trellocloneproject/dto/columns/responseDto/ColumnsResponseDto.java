@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.dto.columns;
+package com.sparta.trellocloneproject.dto.columns.responseDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

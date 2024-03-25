@@ -1,11 +1,11 @@
-package com.sparta.trellocloneproject.service;
+package com.sparta.trellocloneproject.service.column;
 
-import com.sparta.trellocloneproject.dto.columns.ColumnsResponseDto;
+import com.sparta.trellocloneproject.dto.columns.responseDto.ColumnsResponseDto;
 import com.sparta.trellocloneproject.entity.Board;
 import com.sparta.trellocloneproject.entity.Columns;
-import com.sparta.trellocloneproject.repository.BoardRepository;
-import com.sparta.trellocloneproject.repository.ColumnsRepository;
-import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
+import com.sparta.trellocloneproject.repository.Board.BoardRepository;
+import com.sparta.trellocloneproject.repository.column.ColumnsRepository;
+import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

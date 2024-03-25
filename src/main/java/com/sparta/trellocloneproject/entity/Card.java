@@ -1,6 +1,6 @@
 package com.sparta.trellocloneproject.entity;
 
-import com.sparta.trellocloneproject.dto.card.CardRequestDto;
+import com.sparta.trellocloneproject.dto.card.requestDto.CardRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
