@@ -2,8 +2,8 @@ package com.sparta.trellocloneproject.service.comment;
 
 import com.sparta.trellocloneproject.dto.comment.CommentRequestDto;
 import com.sparta.trellocloneproject.entity.Comment;
-import com.sparta.trellocloneproject.repository.CardRepository;
-import com.sparta.trellocloneproject.repository.CommentRepository;
+import com.sparta.trellocloneproject.repository.card.CardRepository;
+import com.sparta.trellocloneproject.repository.repository.CommentRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

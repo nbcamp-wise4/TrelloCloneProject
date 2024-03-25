@@ -1,12 +1,16 @@
 package com.sparta.trellocloneproject.controller.column;
 
-import com.sparta.trellocloneproject.dto.columns.ColumnsPositionRequestDto;
-import com.sparta.trellocloneproject.dto.columns.ColumnsResponseDto;
-import com.sparta.trellocloneproject.repository.BoardMemberRepository;
-import com.sparta.trellocloneproject.repository.BoardRepository;
+import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsPositionRequestDto;
+import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsPositionRequestDto;
+import com.sparta.trellocloneproject.dto.columns.responseDto.ColumnsResponseDto;
+import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
+import com.sparta.trellocloneproject.repository.Board.BoardMemberRepository;
+import com.sparta.trellocloneproject.repository.Board.BoardRepository;
+import com.sparta.trellocloneproject.repository.Board.BoardMemberRepository;
+import com.sparta.trellocloneproject.repository.Board.BoardRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.service.column.ColumnsService;
-import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
+import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
 import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +32,7 @@ public class ColumnsController {
     private final BoardMemberService boardMemberService;
 
     @PostMapping("/{boardId}/columns")
-    public String addColumn(@RequestBody ColumnsRequestDto requestDto,@PathVariable Long boardId,@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public String addColumn(@RequestBody ColumnsRequestDto requestDto, @PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
             columnsService.createColumn(requestDto,boardRepository.getReferenceById(boardId));
             return "ok";
@@ -65,7 +69,7 @@ public class ColumnsController {
 
     }
     @PutMapping("/{boardId}/columns/position")
-    public String changePosition(@PathVariable Long boardId,@RequestBody ColumnsPositionRequestDto requestDto,@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public String changePosition(@PathVariable Long boardId, @RequestBody ColumnsPositionRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
            columnsService.changePosition(requestDto.getPosition1(), requestDto.getPosition2());
            return "ok";
