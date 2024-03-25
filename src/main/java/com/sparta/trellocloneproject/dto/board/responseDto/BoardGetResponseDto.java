@@ -1,6 +1,6 @@
 package com.sparta.trellocloneproject.dto.board.responseDto;
 
-import com.sparta.trellocloneproject.dto.columns.ColumnGetResponseDto;
+import com.sparta.trellocloneproject.dto.columns.responseDto.ColumnGetResponseDto;
 import com.sparta.trellocloneproject.entity.Board;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

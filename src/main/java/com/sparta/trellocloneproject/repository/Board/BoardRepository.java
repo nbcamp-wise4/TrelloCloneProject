@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.repository;
+package com.sparta.trellocloneproject.repository.Board;
 
 import com.sparta.trellocloneproject.entity.Board;
 import com.sparta.trellocloneproject.entity.User;

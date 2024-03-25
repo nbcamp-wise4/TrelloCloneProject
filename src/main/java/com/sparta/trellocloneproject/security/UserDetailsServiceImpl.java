@@ -5,7 +5,7 @@ package com.sparta.trellocloneproject.security;
 
 
 import com.sparta.trellocloneproject.entity.User;
-import com.sparta.trellocloneproject.repository.UserRepository;
+import com.sparta.trellocloneproject.repository.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
