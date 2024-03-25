@@ -1,9 +1,9 @@
-package com.sparta.trellocloneproject.service;
+package com.sparta.trellocloneproject.service.user;
 
 
 
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
-import com.sparta.trellocloneproject.dto.SignupRequestDto;
+import com.sparta.trellocloneproject.dto.login.SignupRequestDto;
 import com.sparta.trellocloneproject.entity.User;
 import com.sparta.trellocloneproject.entity.UserRoleEnum;
 import com.sparta.trellocloneproject.repository.UserRepository;

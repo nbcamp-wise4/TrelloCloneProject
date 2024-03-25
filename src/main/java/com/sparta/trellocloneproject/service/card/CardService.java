@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.service;
+package com.sparta.trellocloneproject.service.card;
 
 import com.sparta.trellocloneproject.dto.board.responseDto.BoardResponseDto;
 import com.sparta.trellocloneproject.dto.card.CardRequestDto;

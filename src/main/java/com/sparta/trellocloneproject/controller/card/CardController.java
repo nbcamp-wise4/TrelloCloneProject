@@ -1,12 +1,11 @@
-package com.sparta.trellocloneproject.controller;
+package com.sparta.trellocloneproject.controller.card;
 
 import com.sparta.trellocloneproject.dto.card.CardRequestDto;
 import com.sparta.trellocloneproject.dto.card.CardResponseDto;
 import com.sparta.trellocloneproject.dto.card.CardUpdateRequestDto;
-import com.sparta.trellocloneproject.dto.columns.ColumnsResponseDto;
 import com.sparta.trellocloneproject.repository.ColumnsRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
-import com.sparta.trellocloneproject.service.CardService;
+import com.sparta.trellocloneproject.service.card.CardService;
 import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.service;
+package com.sparta.trellocloneproject.service.column;
 
 import com.sparta.trellocloneproject.dto.columns.ColumnsResponseDto;
 import com.sparta.trellocloneproject.entity.Board;

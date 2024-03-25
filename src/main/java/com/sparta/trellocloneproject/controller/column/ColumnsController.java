@@ -1,11 +1,11 @@
-package com.sparta.trellocloneproject.controller;
+package com.sparta.trellocloneproject.controller.column;
 
 import com.sparta.trellocloneproject.dto.columns.ColumnsPositionRequestDto;
 import com.sparta.trellocloneproject.dto.columns.ColumnsResponseDto;
 import com.sparta.trellocloneproject.repository.BoardMemberRepository;
 import com.sparta.trellocloneproject.repository.BoardRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
-import com.sparta.trellocloneproject.service.ColumnsService;
+import com.sparta.trellocloneproject.service.column.ColumnsService;
 import com.sparta.trellocloneproject.dto.columns.ColumnsRequestDto;
 import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import lombok.RequiredArgsConstructor;

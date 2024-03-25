@@ -1,14 +1,13 @@
-package com.sparta.trellocloneproject.controller;
+package com.sparta.trellocloneproject.controller.user;
 
 
 
-import com.sparta.trellocloneproject.service.UserService;
-import com.sparta.trellocloneproject.dto.SignupRequestDto;
+import com.sparta.trellocloneproject.service.user.UserService;
+import com.sparta.trellocloneproject.dto.login.SignupRequestDto;
 
 import com.sparta.trellocloneproject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RestController;
