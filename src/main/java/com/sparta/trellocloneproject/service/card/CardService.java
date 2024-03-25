@@ -1,16 +1,14 @@
 package com.sparta.trellocloneproject.service.card;
 
-import com.sparta.trellocloneproject.dto.board.responseDto.BoardResponseDto;
-import com.sparta.trellocloneproject.dto.card.CardRequestDto;
-import com.sparta.trellocloneproject.dto.card.CardResponseDto;
+import com.sparta.trellocloneproject.dto.card.requestDto.CardRequestDto;
+import com.sparta.trellocloneproject.dto.card.responseDto.CardResponseDto;
 import com.sparta.trellocloneproject.entity.Card;
 import com.sparta.trellocloneproject.entity.Columns;
-import com.sparta.trellocloneproject.repository.CardRepository;
-import com.sparta.trellocloneproject.repository.ColumnsRepository;
+import com.sparta.trellocloneproject.repository.card.CardRepository;
+import com.sparta.trellocloneproject.repository.column.ColumnsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -6,7 +6,7 @@ import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.dto.login.SignupRequestDto;
 import com.sparta.trellocloneproject.entity.User;
 import com.sparta.trellocloneproject.entity.UserRoleEnum;
-import com.sparta.trellocloneproject.repository.UserRepository;
+import com.sparta.trellocloneproject.repository.user.UserRepository;
 import com.sparta.trellocloneproject.jwt.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

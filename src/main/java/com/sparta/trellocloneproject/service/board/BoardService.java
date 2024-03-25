@@ -1,17 +1,17 @@
 package com.sparta.trellocloneproject.service.board;
 
 import com.sparta.trellocloneproject.dto.board.responseDto.BoardGetResponseDto;
-import com.sparta.trellocloneproject.dto.card.CardResponseDto;
-import com.sparta.trellocloneproject.dto.columns.ColumnGetResponseDto;
+import com.sparta.trellocloneproject.dto.card.responseDto.CardResponseDto;
+import com.sparta.trellocloneproject.dto.columns.responseDto.ColumnGetResponseDto;
 import com.sparta.trellocloneproject.entity.*;
-import com.sparta.trellocloneproject.repository.BoardMemberRepository;
-import com.sparta.trellocloneproject.repository.BoardRepository;
+import com.sparta.trellocloneproject.repository.Board.BoardMemberRepository;
+import com.sparta.trellocloneproject.repository.Board.BoardRepository;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardRequestDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateColorDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateDescriptionDto;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardUpdateTitleDto;
 import com.sparta.trellocloneproject.dto.board.responseDto.BoardResponseDto;
-import com.sparta.trellocloneproject.repository.ColumnsRepository;
+import com.sparta.trellocloneproject.repository.column.ColumnsRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

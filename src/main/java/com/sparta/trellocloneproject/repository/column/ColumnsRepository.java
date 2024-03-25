@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.repository;
+package com.sparta.trellocloneproject.repository.column;
 
 import com.sparta.trellocloneproject.entity.Board;
 import com.sparta.trellocloneproject.entity.Columns;

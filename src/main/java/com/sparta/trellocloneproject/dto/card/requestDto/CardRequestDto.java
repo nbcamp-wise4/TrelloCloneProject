@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.dto.card;
+package com.sparta.trellocloneproject.dto.card.requestDto;
 
 
 import jakarta.persistence.Column;
