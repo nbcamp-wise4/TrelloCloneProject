@@ -1,5 +1,4 @@
-package com.sparta.trellocloneproject.repository.repository;
-
+package com.sparta.trellocloneproject.repository.comment;
 
 import com.sparta.trellocloneproject.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;

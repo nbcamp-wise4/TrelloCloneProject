@@ -1,9 +1,5 @@
 package com.sparta.trellocloneproject.dto.login;
 
-
-
-
-
 import lombok.Getter;
 import lombok.Setter;
 

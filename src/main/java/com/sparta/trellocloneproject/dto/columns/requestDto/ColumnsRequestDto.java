@@ -4,8 +4,5 @@ import lombok.*;
 @Getter
 @Setter
 public class ColumnsRequestDto {
-
     private String title;
-
-
 }

@@ -1,7 +1,5 @@
 package com.sparta.trellocloneproject.dto.card.requestDto;
 
-
-import jakarta.persistence.Column;
 import lombok.Getter;
 
 @Getter

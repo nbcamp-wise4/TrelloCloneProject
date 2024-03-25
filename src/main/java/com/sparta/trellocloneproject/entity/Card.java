@@ -28,12 +28,9 @@ public class Card {
     private String startDate;
     @Column
     private String dueDate;
-
-
     @ManyToOne
     @JoinColumn(name ="columns_id")
     private Columns columns;
-
     @OneToMany
     @JoinColumn(name = "card_id")
     private List<Comment> comments = new ArrayList<>();
@@ -54,6 +51,7 @@ public class Card {
     public void updateDescription(String description){
         this.description = description;
     }
+
     public void updateColor(String color){
         this.color = color;
     }
@@ -65,7 +63,5 @@ public class Card {
     public void updateDueDate(String dueDate){
         this.dueDate = dueDate;
     }
-
-
 
 }

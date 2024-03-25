@@ -3,7 +3,7 @@ package com.sparta.trellocloneproject.service.column;
 import com.sparta.trellocloneproject.dto.columns.responseDto.ColumnsResponseDto;
 import com.sparta.trellocloneproject.entity.Board;
 import com.sparta.trellocloneproject.entity.Columns;
-import com.sparta.trellocloneproject.repository.Board.BoardRepository;
+import com.sparta.trellocloneproject.repository.board.BoardRepository;
 import com.sparta.trellocloneproject.repository.column.ColumnsRepository;
 import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ColumnsService {
-
     private final ColumnsRepository columnsRepository;
     private final BoardRepository boardRepository;
 
@@ -43,10 +42,9 @@ public class ColumnsService {
         columnsRepository.save(column2);
 
     }
+
     public List<ColumnsResponseDto> getColumnsList(Long BoardId){
         List<Columns> ColumnsList = columnsRepository.findColumnsByBoard(boardRepository.getReferenceById(BoardId));
         return ColumnsList.stream().map(ColumnsResponseDto::new).toList();
     }
-
-
 }

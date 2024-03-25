@@ -56,11 +56,6 @@ public class CardService {
 
     }
 
-    public Card getCard(Long cardId){
-        Card card = cardRepository.findById(cardId).orElseThrow(()-> new IllegalArgumentException("해당 카드이 존재하지 않습니다"));
-        return card;
-    }
-
     public List<CardResponseDto> getAllCardOfColumn(Long columId){
         List<Card> cardList =  columnsRepository.getReferenceById(columId).getCards();
         return cardList.stream().map(CardResponseDto::new).toList();

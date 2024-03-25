@@ -1,7 +1,5 @@
 package com.sparta.trellocloneproject.security;
 
-
-
 import com.sparta.trellocloneproject.entity.User;
 import com.sparta.trellocloneproject.entity.UserRoleEnum;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.sparta.trellocloneproject.repository.Board;
+package com.sparta.trellocloneproject.repository.board;
 
 import com.sparta.trellocloneproject.entity.BoardMember;
 import org.springframework.data.jpa.repository.JpaRepository;

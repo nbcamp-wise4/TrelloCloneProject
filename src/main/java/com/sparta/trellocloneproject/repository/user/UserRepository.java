@@ -1,7 +1,5 @@
 package com.sparta.trellocloneproject.repository.user;
 
-
-
 import com.sparta.trellocloneproject.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

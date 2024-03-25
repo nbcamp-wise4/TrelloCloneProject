@@ -1,16 +1,11 @@
 package com.sparta.trellocloneproject.controller.column;
 
 import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsPositionRequestDto;
-import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsPositionRequestDto;
 import com.sparta.trellocloneproject.dto.columns.responseDto.ColumnsResponseDto;
 import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
-import com.sparta.trellocloneproject.repository.Board.BoardMemberRepository;
-import com.sparta.trellocloneproject.repository.Board.BoardRepository;
-import com.sparta.trellocloneproject.repository.Board.BoardMemberRepository;
-import com.sparta.trellocloneproject.repository.Board.BoardRepository;
+import com.sparta.trellocloneproject.repository.board.BoardRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.service.column.ColumnsService;
-import com.sparta.trellocloneproject.dto.columns.requestDto.ColumnsRequestDto;
 import com.sparta.trellocloneproject.service.board.BoardMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ColumnsController {
     private final BoardRepository boardRepository;
-    private final BoardMemberRepository boardmemberRepository;
     private final ColumnsService columnsService;
     private final BoardMemberService boardMemberService;
 
@@ -47,7 +41,6 @@ public class ColumnsController {
             return "ok";
         }
         return null;
-
     }
 
     @DeleteMapping("/{boardId}/{columnId}")
@@ -66,8 +59,8 @@ public class ColumnsController {
             return new ResponseEntity<>(ColumnsList, HttpStatus.OK);
         }
         return null;
-
     }
+
     @PutMapping("/{boardId}/columns/position")
     public String changePosition(@PathVariable Long boardId, @RequestBody ColumnsPositionRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
@@ -75,7 +68,5 @@ public class ColumnsController {
            return "ok";
         }
         return null;
-
     }
-
 }

@@ -17,8 +17,6 @@ public class User extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-//    @OneToMany
-//    private List<Board> boards;
     @Column
     private String username;
     @Column
@@ -42,5 +40,4 @@ public class User extends Timestamped{
         if(!(o instanceof User user)) return false;
         return Objects.equals(getID(), user.getID());
     }
-
 }

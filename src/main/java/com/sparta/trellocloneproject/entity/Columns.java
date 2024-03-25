@@ -22,11 +22,9 @@ public class Columns {
     private String title;
     @Column
     private Long position;
-
     @ManyToOne
     @JoinColumn(name ="board_id")
     private Board board;
-
     @OneToMany
     @JoinColumn(name = "columns_id")
     private List<Card> cards = new ArrayList<>();
@@ -40,6 +38,7 @@ public class Columns {
     public void updateTitle(String title){
         this.title = title;
     }
+
     public void updatePosition(Long position){
         this.position = position;
     }

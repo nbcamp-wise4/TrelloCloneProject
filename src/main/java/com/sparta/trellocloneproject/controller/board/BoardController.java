@@ -133,4 +133,5 @@ public class BoardController {
 
         return ResponseEntity.ok("보드 멤버 삭제 완료");
     }
+
 }

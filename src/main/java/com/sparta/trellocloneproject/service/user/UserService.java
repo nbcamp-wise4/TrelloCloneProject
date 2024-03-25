@@ -20,11 +20,9 @@ import java.util.Optional;
 @Service
 
 public class UserService {
-
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
     private final JwtUtil jwtUtil;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
@@ -46,20 +44,13 @@ public class UserService {
 
         UserRoleEnum role = UserRoleEnum.USER;
 
-
         if (ADMIN_TOKEN.equals(requestDto.getAuthorityToken())) {
 
             role = UserRoleEnum.ADMIN;
         }
-
-
-
         User user = new User(username,password,role,name);
         userRepository.save(user);
     }
-
-
-
 
     public void deleteUser(Long userId, UserDetailsImpl userDetails) {
         User user = userRepository.findById(userId).orElseThrow(

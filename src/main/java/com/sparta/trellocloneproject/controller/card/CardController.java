@@ -3,9 +3,6 @@ package com.sparta.trellocloneproject.controller.card;
 import com.sparta.trellocloneproject.dto.card.requestDto.CardRequestDto;
 import com.sparta.trellocloneproject.dto.card.requestDto.CardUpdateRequestDto;
 import com.sparta.trellocloneproject.dto.card.responseDto.CardResponseDto;
-import com.sparta.trellocloneproject.dto.card.responseDto.CardResponseDto;
-import com.sparta.trellocloneproject.dto.card.requestDto.CardUpdateRequestDto;
-import com.sparta.trellocloneproject.repository.column.ColumnsRepository;
 import com.sparta.trellocloneproject.repository.column.ColumnsRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import com.sparta.trellocloneproject.service.card.CardService;
@@ -24,7 +21,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class CardController {
-
     private final CardService cardService;
     private final BoardMemberService boardMemberService;
     private final ColumnsRepository columnsRepository;
@@ -90,7 +86,7 @@ public class CardController {
 }
 
     @GetMapping("/{boardId}/{columnId}")
-    public ResponseEntity<List<CardResponseDto>> getCardList(@PathVariable Long boardId, @PathVariable Long columnId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<List<CardResponseDto>>getCardList(@PathVariable Long boardId, @PathVariable Long columnId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         if(boardMemberService.isUserMember(userDetails,boardId)){
             List<CardResponseDto> CardList = cardService.getAllCardOfColumn(columnId);
             return new ResponseEntity<>(CardList, HttpStatus.OK);
@@ -98,5 +94,4 @@ public class CardController {
         return null;
 
     }
-
 }

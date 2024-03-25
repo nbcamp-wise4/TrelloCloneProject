@@ -22,8 +22,5 @@ public class BoardMember {
     public BoardMember(Long BoardID,Long UserID){
         this.boardID = BoardID;
         this.userID = UserID;
-
-
     }
-
 }

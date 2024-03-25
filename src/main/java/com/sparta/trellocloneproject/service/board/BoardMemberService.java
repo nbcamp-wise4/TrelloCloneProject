@@ -3,7 +3,7 @@ package com.sparta.trellocloneproject.service.board;
 import com.sparta.trellocloneproject.dto.board.requestDto.BoardMemberDeleteDto;
 import com.sparta.trellocloneproject.entity.BoardMember;
 import com.sparta.trellocloneproject.entity.User;
-import com.sparta.trellocloneproject.repository.Board.BoardMemberRepository;
+import com.sparta.trellocloneproject.repository.board.BoardMemberRepository;
 import com.sparta.trellocloneproject.repository.user.UserRepository;
 import com.sparta.trellocloneproject.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
